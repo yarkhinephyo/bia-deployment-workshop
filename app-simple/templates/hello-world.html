@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+</head>
+<body>
+
+  <h3>Hello SDAs</h3>
+  <p>This is an HTML page.</p>
+
+  <p id="result"></p>
+
+  <script>
+    let p = document.getElementById("result");
+    
+    fetch("/add?num1=4&num2=3")
+    .then(res => res.json())
+    .then(obj => {
+      p.innerText = obj.answer;
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  
+  </script>
+  
+</body>
+</html>
