@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Petals & Sepals</title>
+  <style>
+    table {
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h4>What Iris is it? &#x1F337</h4>
+
+  <form>
+    <table>
+      <tr>
+        <td>Sepal Length (cm)</td>
+        <td><input name="sepalLength" type="number"></td>
+      </tr>
+      <tr>
+        <td>Sepal Width (cm)</td>
+        <td><input name="sepalWidth" type="number"></td>
+      </tr>
+      <tr>
+        <td>Petal Length (cm)</td>
+        <td><input name="petalLength" type="number"></td>
+      </tr>
+      <tr>
+        <td>Petal Width (cm)</td>
+        <td><input name="petalWidth" type="number"></td>
+      </tr>
+    </table>
+  </form>
+
+  <button onclick="submit()">Predict!</button>
+
+  <pre id="output"></pre>
+
+  <script>
+    function submit() {
+      const formElements = document.forms[0].elements;
+      const output = document.getElementById("output");
+
+      const sepalLength = formElements.sepalLength.value;
+      const sepalWidth = formElements.sepalWidth.value;
+      const petalLength = formElements.petalLength.value;
+      const petalWidth = formElements.petalWidth.value;
+
+      fetch(`/dev/predict?
+      &sepalLength=${sepalLength}&
+      &sepalWidth=${sepalWidth}&
+      &petalLength=${petalLength}&
+      &petalWidth=${petalWidth}`)
+        .then(res => res.json())
+        .then(resJson => output.innerText = resJson.message);
+    }
+  </script>
+
+</body>
+
+</html>
